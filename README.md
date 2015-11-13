@@ -1,2 +1,2 @@
 # hackadays-RTS
-Repository pour notre projet 
+Repository pour le hackaton Hackdays-RTS
