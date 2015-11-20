@@ -3,7 +3,7 @@
 angular.module('rtsHackdaysApp')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Tous',
       'link': '/'
     }];
 

@@ -1,5 +1,63 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="" ng-repeat="month in months">
+        <li>
+          <a href="#">{{ month.date | date:'MMMM' }}</a>
+          <ul class="" ng-repeat="keyword in month.keywords">
+            <li>
+              <span>[{{ keyword.category | uppercase }}]</span>
+              <span>#{{ keyword.name}}</span>
+
+            </li>
+            <ul class="" ng-repeat="item in keyword.items">
+              <li>
+                <a href="{{ item.url }}">{{ item.title }}</a>
+                <p class="small">{{ item.intro }}</p>
+                <img src="{{ item.img }}" width="250" />
+                <p class="small">JSON Path: {{ item.json }} </p>
+
+
+                <!-- VIDEO ITEM -->
+                <videogular vg-theme="player.theme" ng-if="item.articleType == 'video' && item.details && item.details.streams">
+                  <vg-media vg-src="item.details.streams._src"> 
+                  </vg-media>
+             
+                  <vg-controls>
+                    <vg-play-pause-button></vg-play-pause-button>
+                    <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                    <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    </vg-scrub-bar>
+                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                    <vg-volume>
+                      <vg-mute-button></vg-mute-button>
+                      <vg-volume-bar></vg-volume-bar>
+                    </vg-volume>
+                    <vg-fullscreen-button></vg-fullscreen-button>
+                  </vg-controls>
+             
+                  <vg-overlay-play></vg-overlay-play>
+                </videogular>
+                <!-- END VIDEO ITEM -->
+
+                <p>{{ item.details.streams._src }}</p>
+              </li>
+
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!--
 <header class="hero-unit" id="banner">
   <div class="container">
     <h1>'Allo, 'Allo!</h1>
@@ -7,7 +65,6 @@
     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
-
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
@@ -26,3 +83,4 @@
          <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
   </div>
 </footer>
+-->
