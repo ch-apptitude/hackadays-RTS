@@ -5,7 +5,8 @@ angular.module('rtsHackdaysApp')
     $scope.menu = [{
       'title': 'Tous',
       'link': '/'
-    },{
+    },
+    {
       'title': 'Trends',
       'link': '/trends'
     }];

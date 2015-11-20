@@ -1,34 +1,172 @@
-.thing-form {
-    margin: 20px 0;
+header{
+    background-color: #161616;
+    height:76px;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
+header img{
+    height: 40px;
+    padding: 10px 0 0 0;
 }
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+header h1{
+    font-size: 13px;
+    color: #bababa;
 }
 
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
+/* ----------TYPOGRAPHY---------- */
+
+h2{
+    margin-top: 50px;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+h3{
+    margin-top: 40px;
+}
+
+p{
+    font-size: 20px;
+}
+
+header button{
+    height: 40px;
+    margin-top: 16px;
+    padding: 0 10px;
+    background-color:#af001f;
+    border: none;
+    color: #FFF;
+    border-radius: 2px;
+}
+
+header button:hover{
+    
+}
+
+header button img{
+    height: 34px;
+    padding-bottom: 10px;
+    margin-right: 6px;
+}
+
+article {
+    background-color: #FFF;
+    padding: 20px;
+}
+
+article.push-up {
+    margin-top: -100px;
+}
+
+article span.category {
+    background-color: red;
+    color: #FFF;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+article p.read-more {
     text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    cursor: pointer; 
 }
 
-.footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+.aside-info {
+    margin-top: 100px;
 }
 
-.navbar-text {
-    margin-left: 15px;
+.nav-left-afix {
+    background: #ccc;
+    position: fixed;
+    top: 76px;
+    left: 0px;
+    height: 100%;
+    width: 100px;
+}
+
+.nav-left-afix ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 10px;
+}
+
+.nav-left-afix a {
+    color: #000;
+    text-transform: capitalize;
+}
+
+ul.ul-keywords {
+    list-style: none;
+    padding: 0;
+}
+
+.dotstyle{
+
+}
+.dotstyle ul {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  cursor: default;
+}
+
+.dotstyle li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 8px 8px;
+  margin-left: 0px;
+  padding-left: 0px;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+
+.dotstyle li a {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border-radius: 50%;
+  background-color: #000;
+  background-color: rgba(66,66,6,1);
+  text-indent: -999em;
+  cursor: pointer; /* make the text accessible to screen readers */
+  position: absolute;
+}
+
+.dotstyle li a span{
+  text-indent: 1em;
+}
+
+/* Fill up */
+.dotstyle-fillup li a {
+  overflow: hidden;
+  background-color: rgba(0,0,0,0);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,1);
+  transition: background 0.3s;
+}
+
+.dotstyle-fillup li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 1px #fff;
+  transition: height 0.3s;
+}
+
+.dotstyle-fillup li a:hover,
+.dotstyle-fillup li a:focus {
+  background-color: rgba(255,0,0,0.2);
+}
+
+.dotstyle-fillup li.current a::after {
+  height: 100%;
 }

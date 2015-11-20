@@ -1,86 +1,97 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<!--<div ng-include="'components/navbar/navbar.html'"></div>-->
+<div ng-include="'components/navbar/header.html'"></div>
 
 
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <ul class="" ng-repeat="month in months">
-        <li>
-          <a href="#">{{ month.date | date:'MMMM' }}</a>
-          <ul class="" ng-repeat="keyword in month.keywords">
-            <li>
-              <span>[{{ keyword.category | uppercase }}]</span>
-              <span>#{{ keyword.name}}</span>
-
-            </li>
-            <ul class="" ng-repeat="item in keyword.items">
-              <li>
-                <a href="{{ item.url }}">{{ item.title }}</a>
-                <p class="small">{{ item.intro }}</p>
-                <img src="{{ item.img }}" width="250" />
-                <p class="small">JSON Path: {{ item.json }} </p>
-
-
-                <!-- VIDEO ITEM -->
-                <videogular vg-theme="player.theme" ng-if="item.articleType == 'video' && item.details && item.details.streams">
-                  <vg-media vg-src="item.details.streams._src"> 
-                  </vg-media>
-             
-                  <vg-controls>
-                    <vg-play-pause-button></vg-play-pause-button>
-                    <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-                    <vg-scrub-bar>
-                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                    </vg-scrub-bar>
-                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                    <vg-volume>
-                      <vg-mute-button></vg-mute-button>
-                      <vg-volume-bar></vg-volume-bar>
-                    </vg-volume>
-                    <vg-fullscreen-button></vg-fullscreen-button>
-                  </vg-controls>
-             
-                  <vg-overlay-play></vg-overlay-play>
-                </videogular>
-                <!-- END VIDEO ITEM -->
-
-                <p>{{ item.details.streams._src }}</p>
+<!-- Vertical Navigation - Pin to Top -->
+<div class="nav-left-afix" style="">
+  <div class="">
+    <ul>
+      <li ng-repeat="month in months" class="">
+        <a href="#{{ month.date | date:'MM-yyyy' }}">{{ month.date | date:'MMMM yy' }}</a>
+          <div class="dotstyle dotstyle-fillup">
+            <ul>
+              <li ng-repeat="keyword in month.keywords" class="">
+                <a href="#{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}"></a>
               </li>
-
             </ul>
-          </ul>
-        </li>
-      </ul>
-    </div>
+          </div>
+      </li>
+    </ul>
   </div>
 </div>
+<!-- End Vertical Navigation - Pin to Top -->
 
-
-<!--
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+    <div class="col-xs-12 col-lg-12">
+      <div ng-repeat="month in months" 
+          id="{{ month.date | date:'MM-yyyy' }}">
+        
+        <!-- Keywords List -->
+        <ul class="ul-keywords">
+          <li ng-repeat="keyword in month.keywords" class="row">
+            <h2 class="col-xs-12 col-md-12">#{{ keyword.name | uppercase}}</h2>
+            
+            <!-- Main Article -->
+            <div ng-if="keyword.mainArticle !== undefined"
+                 id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
+              <h3 class="col-xs-12 col-md-10">{{ keyword.mainArticle.title }}</h3>
+              <p class="col-xs-12 col-md-10">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
+            
+
+              <!-- VIDEO Player -->
+              <div class="col-xs-12 col-md-10"
+                   ng-if="keyword.mainArticle.articleType == 'video' && keyword.mainArticle.details !== undefined && keyword.mainArticle.details.streams != undefined">
+                <video-player source="keyword.mainArticle.details.streams._src"></video-player>
+              </div><!-- END VIDEO ITEM -->
+              
+              <!-- if no video player, diplay image -->
+              <div class="col-xs-12 col-md-10"
+                   ng-if="keyword.mainArticle.articleType != 'video' && keyword.mainArticle.img">
+                   <img src="{{ keyword.mainArticle.img }}" style="max-width:100%;" />
+              </div><!-- END IMAGE -->
+
+              <!-- Aside Information -->
+              <div class="col-xs-12 col-md-2 aside-info" 
+                   ng-if="keyword.mainArticle['related-content'] && keyword.mainArticle['related-content'].mainMediaAttachment && keyword.mainArticle['related-content'].mainMediaAttachment[0]">
+                <p>{{ keyword.mainArticle['related-content'].mainMediaAttachment[0].title }}</p>
+                <em>[{{ keyword.mainArticle['related-content'].mainMediaAttachment[0].photographer }}]</em>
+              </div> <!-- End Aside Information -->
+ 
+              <!-- Article -->
+              <article class="col-xs-12 col-md-offset-3 col-sm-6"
+                       ng-class="{'push-up': keyword.mainArticle.articleType != 'video'}">
+               
+                <span class="category">{{ keyword.category | uppercase }}</span>
+                <h4 ng-bind-html="keyword.mainArticle.intro"></h4>
+                <p class="read-more"
+                   ng-class="{hidden: !keyword.mainArticle.isCollapsed}"
+                   ng-click="keyword.mainArticle.isCollapsed = !keyword.mainArticle.isCollapsed">
+                  AFFICHER PLUS
+                </p>
+                
+                <!-- body -->
+                <div ng-bind-html="keyword.mainArticle.body" uib-collapse="keyword.mainArticle.isCollapsed"></div>
+               <!--<p class="read-more"
+                   ng-class="{hidden: keyword.mainArticle.isCollapsed}"
+                   ng-click="keyword.mainArticle.isCollapsed = !keyword.mainArticle.isCollapsed">
+                  FERMER
+                </p>-->
+              </article> <!-- End Article -->
+
+            </div><!-- END Main Article -->
+
+            <!-- Related Articles -->
+            <div class="" ng-if="keyword.items.length > 1">
+              <h3 class="col-xs-12 col-md-8">Les autres articles sur #{{ keyword.name }}</h3>
+
+              <div ng-repeat="item in keyword.items.slice(1)">
+                <related-media item="item" index="$index"></related-media>
+              </div>
+            </div>
+          </li>
+        </ul> <!-- End Keywords List -->
+      </div>
     </div>
   </div>
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.1.1 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
--->
