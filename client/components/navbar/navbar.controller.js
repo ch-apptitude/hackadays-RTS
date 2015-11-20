@@ -5,6 +5,9 @@ angular.module('rtsHackdaysApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Trends',
+      'link': '/trends'
     }];
 
     $scope.isCollapsed = true;
