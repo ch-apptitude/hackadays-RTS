@@ -7,11 +7,11 @@
   <div class="">
     <ul>
       <li ng-repeat="month in months" class="">
-        <a href="#{{ month.date | date:'MM-yyyy' }}">{{ month.date | date:'MMMM yy' }}</a>
+        <a href="#{{ month.date | date:'MM-yyyy' }}"  du-smooth-scroll offset="80">{{ month.date | date:'MMMM yy' }}</a>
           <div class="dotstyle dotstyle-fillup">
             <ul>
               <li ng-repeat="keyword in month.keywords | orderBy:'order'" class="">
-                <a href="#{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
+                <a href="#{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}"  du-smooth-scroll du-scrollspy offset="80">
                   <i class="buble"></i>
                   <span>{{keyword.name}}</span>
                 </a>
@@ -24,15 +24,14 @@
 </div>
 <!-- End Vertical Navigation - Pin to Top -->
 
-<div class="container container-shadow">
+<div class="container container-shadow" >
   <div class="row">
     <div class="col-xs-12 col-lg-12 col-md-10">
-      <div ng-repeat="month in months" 
-          id="{{ month.date | date:'MM-yyyy' }}">
-        
+      <div ng-repeat="month in months" id="{{ month.date | date:'MM-yyyy' }}">
+
         <!-- Keywords List -->
         <ul class="ul-keywords">
-          <li ng-repeat="(key, keyword) in month.keywords | orderBy:'order'" class="row">
+          <li ng-repeat="(key, keyword) in month.keywords | orderBy:'order'" class="row" id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
             <h2 class="col-xs-12 col-md-12">
                 <span class="red">#</span><span>{{ keyword.name | uppercase}}</span>
               <bar-chart ng-if="keyword.trends" 
@@ -45,8 +44,7 @@
             </h2>
             
             <!-- Main Article -->
-            <div ng-if="keyword.mainArticle !== undefined"
-                 id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
+            <div ng-if="keyword.mainArticle !== undefined">
               <h3 class="col-xs-12 col-md-10">{{ keyword.mainArticle.title }}</h3>
               <p class="col-xs-12 col-md-10 date">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
             
@@ -90,8 +88,8 @@
                 </p>-->
               </article> <!-- End Article -->
 
-              <div class="col-xs-12 col-md-3 aside-info" ng-if="keyword.mainArticle.detail['related-content'].articleMediaAttachment && keyword.mainArticle.detail['related-content'].articleMediaAttachment[0] && !keyword.mainArticle.isCollapsed">
-                <img src="{{ keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].img }}" style="max-width:100%;" />
+              <div class="col-xs-12 col-md-3 aside-info" ng-show="keyword.mainArticle.detail['related-content'].articleMediaAttachment && keyword.mainArticle.detail['related-content'].articleMediaAttachment[0] && !keyword.mainArticle.isCollapsed">
+                <img ng-src="{{ keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].img }}" style="max-width:100%;" />
                 <p ng-bind-html="keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].intro"></p>
               </div>
 
