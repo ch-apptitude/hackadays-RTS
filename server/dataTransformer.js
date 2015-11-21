@@ -22,7 +22,8 @@ request(ngRocksEndPoint+'rtsCuratedObjects', function (error, response) {
 							//console.log(rtsCuratedObject.item.url);
 
 				});
-				rtsCuratedObjects =  _.sortBy(agregatedCuratedObjects, 'date');
+				
+				rtsCuratedObjects =  _.sortByOrder(agregatedCuratedObjects, 'date',['desc']);
 
 				console.log(rtsCuratedObjects);
 });

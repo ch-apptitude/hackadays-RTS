@@ -54,13 +54,13 @@ exports.datas = function(req, res) {
       if(item.detail.body){
         item.body = item.detail.body;
       }
-      
+
       currentKeyword.items.push(item);
 
     });
 
     // sort by date,
-    rtsCuratedObjects =  _.sortBy(aggregatedCuratedObjects, 'date');
+    rtsCuratedObjects =  _.sortByOrder(aggregatedCuratedObjects, 'date',['desc']);
     
     // return array
     return res.json(200, rtsCuratedObjects);
