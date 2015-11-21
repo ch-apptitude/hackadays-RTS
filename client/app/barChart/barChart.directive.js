@@ -67,5 +67,5 @@ function draw($scope) {
       .attr("y", function(d) { return y(d); })
       .attr("height", function(d) { return height - y(d); })
       .attr("width", barWidth - 1)
-      .attr("title", function(d, i) { return (i+1) + " " + str + ": " +d + " article"; });
+      .attr("title", function(d, i) { return (i+1) + " " + str + ": " +d + " article(s)"; });
 }

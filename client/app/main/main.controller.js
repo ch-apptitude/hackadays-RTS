@@ -453,12 +453,35 @@ angular.module('rtsHackdaysApp')
 
     $http.get('http://hackdays.ngrok.com/api/rtsCuratedObjects/datas')
       .then(function (response) {
-        $scope.months = transformData(response.data);
+        var month = response.data;
+
+        $scope.months = transformData(month);
+
+        /*$http.get('http://0e537a34.ngrok.io/api/tweets/recommended?category=')
+         .then(function(tweets) {
+            
+            var tweets =  tweets.data;
+            //console.log(month);
+            _.forEach(tweets, function(tw) {
+              var m = _.findWhere(month, {date: moment(tw.date).format('YYYY-MM-DD')});
+
+              if(m) {
+                _.forEach(tw.keywords, function(k) {
+                  m.keywords.push(k);  
+              });
+                
+              }
+            });
+
+            $scope.months = transformData(month);
+         });
+        */
       })
 
 
     function transformData(datas) {
 
+      //console.log(datas);
 
       // Iterate over everything to prepare our data set
       _.forEach(datas, function (month, k) {
