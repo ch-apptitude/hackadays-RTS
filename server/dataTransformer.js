@@ -10,18 +10,20 @@ var agregatedCuratedObjects = [];
 
 
 request(ngRocksEndPoint+'rtsCuratedObjects', function (error, response) {
-		//		console.log(response.body);
+				//console.log(response.body);
 				var rtsCuratedObjects = JSON.parse(response.body);
 
 				
 				
 				_.forEach(rtsCuratedObjects, function(rtsCuratedObject, key){
-							agregateCuratedObjects(rtsCuratedObject);	
-							
+							agregateCuratedObjects(rtsCuratedObject);
+//console.log(rtsCuratedObject)
+
 							//console.log(rtsCuratedObject.item.url);
 
 				});
-				rtsCuratedObjects =  _.sortBy(agregatedCuratedObjects, 'date');
+				
+				rtsCuratedObjects =  _.sortByOrder(agregatedCuratedObjects, 'date',['desc']);
 
 				console.log(rtsCuratedObjects);
 });
@@ -52,10 +54,19 @@ function agregateCuratedObjects(rtsCuratedObject)
 
 		var item = rtsCuratedObject.item;
 
+		if(item.detail.body){
+			item.body = item.detail.body;
+		}
+
+
 		item.details = item.detail.streams;
+
 		if(item.details){
 			item.details.preview_image_url = item.detail.preview_image_url;
 		}
 
-		currentKeyword.items.push();
+
+
+
+		currentKeyword.items.push(item);
 }

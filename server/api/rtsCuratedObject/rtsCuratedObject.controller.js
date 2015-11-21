@@ -51,12 +51,16 @@ exports.datas = function(req, res) {
         item.details.preview_image_url = item.detail.preview_image_url;
       }
 
+      if(item.detail.body){
+        item.body = item.detail.body;
+      }
+
       currentKeyword.items.push(item);
 
     });
 
     // sort by date,
-    rtsCuratedObjects =  _.sortBy(aggregatedCuratedObjects, 'date');
+    rtsCuratedObjects =  _.sortByOrder(aggregatedCuratedObjects, 'date',['desc']);
     
     // return array
     return res.json(200, rtsCuratedObjects);
