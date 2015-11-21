@@ -5,10 +5,20 @@ var Rtsobject = require('./rtsObject.model');
 
 // Get list of rtsObjects
 exports.index = function(req, res) {
-  Rtsobject.find(function (err, rtsObjects) {
+  Rtsobject.find({'detail': {$exists: false}})
+   // .limit(20)
+    .exec(function (err, rtsObjects) {
     if(err) { return handleError(res, err); }
     return res.json(200, rtsObjects);
   });
+};
+// Get list of rtsObjects
+exports.drop = function(req, res) {
+  Rtsobject.remove({}, function(err) {
+    if(err) { return handleError(res, err); }
+    return res.send(204);
+  });
+
 };
 
 // Get a single rtsObject

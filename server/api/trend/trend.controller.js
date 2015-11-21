@@ -35,6 +35,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!trend) { return res.send(404); }
     var updated = _.merge(trend, req.body);
+    updated.markModified('category');
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, trend);

@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var RtsobjectSchema = new Schema({
   trend: String,
   date: Date,
-  object: {}
+  object: {},
+  detail: {}
 });
 
 module.exports = mongoose.model('Rtsobject', RtsobjectSchema);
