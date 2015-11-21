@@ -36,7 +36,7 @@ angular.module('rtsHackdaysApp')
             "us open": { title: " blabablalb", account: "@rhalloran" },
             "air france": { title: " blabablalb", account: "@rhalloran" },
             "volkswagen": { title: " blabablalb", account: "@rhalloran" },
-          };
+          }
       });
 
 
