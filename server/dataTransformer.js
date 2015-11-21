@@ -54,7 +54,6 @@ function agregateCuratedObjects(rtsCuratedObject)
 
 		item.details = item.detail.streams;
 		if(item.details){
-			item.details = {};
 			item.details.preview_image_url = item.detail.preview_image_url;
 		}
 

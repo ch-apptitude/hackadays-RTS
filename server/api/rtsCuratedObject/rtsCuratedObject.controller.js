@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var moment = require('moment');
 var Rtscuratedobject = require('./rtsCuratedObject.model');
 
 // Get list of rtsCuratedObjects
@@ -10,6 +11,22 @@ exports.index = function(req, res) {
     return res.json(200, rtsCuratedObjects);
   });
 };
+var aggregatedCuratedObjects = [];
+exports.datas = function(req, res) {
+  Rtscuratedobject.find(function (err, rtsCuratedObjects) {
+    if(err) { return handleError(res, err); }
+    _.forEach(rtsCuratedObjects, function(rtsCuratedObject, key){
+      console.log(rtsCuratedObject.keyword.name);
+      aggregateCuratedObjects(rtsCuratedObject);
+      console.log(aggregatedCuratedObjects);
+      //console.log(rtsCuratedObject.item.url);
+
+    });
+    rtsCuratedObjects =  _.sortBy(aggregatedCuratedObjects, 'date');
+    return res.json(200, rtsCuratedObjects);
+  })
+
+}
 
 // Get a single rtsCuratedObject
 exports.show = function(req, res) {
@@ -56,4 +73,40 @@ exports.destroy = function(req, res) {
 
 function handleError(res, err) {
   return res.send(500, err);
+}
+
+
+
+function aggregateCuratedObjects(rtsCuratedObject)
+{
+  //agregatedCuratedObjects.push =
+  var currentMonth = _.findWhere(aggregatedCuratedObjects, { 'date': moment(rtsCuratedObject.date).format('YYYY-MM-DD') });
+
+  if(!currentMonth){
+    currentMonth = {};
+    currentMonth.date = moment(rtsCuratedObject.date).format('YYYY-MM-DD');
+    currentMonth.keywords = [];
+    aggregatedCuratedObjects.push(currentMonth);
+  }
+
+  var currentKeyword = _.findWhere(currentMonth.keywords, { 'name': rtsCuratedObject.keyword.name });
+
+  if(!currentKeyword){
+    var currentKeyword = {};
+    currentKeyword.name  = rtsCuratedObject.keyword.name;
+    currentKeyword.trends = [4,355,2,4,12,20,58,1,1,0,1,48,12,7,8,5,6,1,3,48,12,7,8,5,6,1,3];
+    currentKeyword.category = rtsCuratedObject.keyword.category;
+    currentKeyword.order = rtsCuratedObject.keyword.order;
+    currentKeyword.items = [];
+    currentMonth.keywords.push(currentKeyword);
+  }
+
+  var item = rtsCuratedObject.item;
+
+  item.details = item.detail.streams;
+  if(item.details){
+    item.details.preview_image_url = item.detail.preview_image_url;
+  }
+
+  currentKeyword.items.push(item);
 }
