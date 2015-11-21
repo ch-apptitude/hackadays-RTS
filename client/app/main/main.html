@@ -23,20 +23,20 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-lg-12">
+    <div class="col-xs-12 col-lg-12 col-md-10">
       <div ng-repeat="month in months" 
           id="{{ month.date | date:'MM-yyyy' }}">
         
         <!-- Keywords List -->
         <ul class="ul-keywords">
           <li ng-repeat="keyword in month.keywords" class="row">
-            <h2 class="col-xs-12 col-md-12">#{{ keyword.name | uppercase}}</h2>
+            <h2 class="col-xs-12 col-md-12"><span class="red">#</span>{{ keyword.name | uppercase}}</h2>
             
             <!-- Main Article -->
-            <div class="date" ng-if="keyword.mainArticle !== undefined"
+            <div ng-if="keyword.mainArticle !== undefined"
                  id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
               <h3 class="col-xs-12 col-md-10">{{ keyword.mainArticle.title }}</h3>
-              <p class="col-xs-12 col-md-10">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
+              <p class="col-xs-12 col-md-10 date">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
             
               <!-- VIDEO Player -->
               <div class="col-xs-12 col-md-10"
@@ -82,12 +82,24 @@
 
             <!-- Related Articles -->
             <div class="" ng-if="keyword.items.length > 1">
-              <h3 class="col-xs-12 col-md-8">Les autres articles sur #{{ keyword.name }}</h3>
+              <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
 
               <div ng-repeat="item in keyword.items.slice(1)">
                 <related-media item="item" index="$index"></related-media>
               </div>
             </div>
+              
+            <!-- Tweet -->
+            
+            <div class="col-xs-12 col-md-12">
+              <div class="twitter-block">
+                  <img src="../../assets/images/twitter-black.png" alt="" />
+                  <p>“ The all-time series is tied 21-21. Who takes the lead in this epic rivalry tonight?  ”</p>
+                  <a href="#" target="_blank">@r_halloran</a>
+              </div>
+            </div> <!-- End Tweet -->
+            
+              
           </li>
         </ul> <!-- End Keywords List -->
       </div>
