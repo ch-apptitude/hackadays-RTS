@@ -38,57 +38,106 @@ console.log(september.format());
 
 var result = [];
 /*RtsCuratedObject.aggregate({
-  $group: {
-    '_id': '$keyword.name',
-    'name': {$first: '$keyword.name'},
-    'date': {$first: '$keyword.date'},
-    'category': {$first: '$keyword.category'},
-    'order': {$first: '$keyword.order'},
-    'items': {$push: '$item'}
-  }
+ $group: {
+ '_id': '$keyword.name',
+ 'name': {$first: '$keyword.name'},
+ 'date': {$first: '$keyword.date'},
+ 'category': {$first: '$keyword.category'},
+ 'order': {$first: '$keyword.order'},
+ 'items': {$push: '$item'}
+ }
+ })
+ .exec(function (e, r) {
+ console.log(r);
+ })      */
+client.get('search/tweets', {q: 'until:2015-01-01', result_type: 'popular', lang: 'fr'}, function(error, tweets, response){
+  console.log(tweets);
+});
+RtsCuratedObject.find(function (e, objects) {
+  _.each(objects, function (obj) {
+    var publicationDate = moment(obj.item.publication);
+    var since = moment(publicationDate).subtract(1, 'week').format('YYYY-MM-DD');
+    var until = moment(publicationDate).add(1, 'week').format('YYYY-MM-DD');
+
+  })
 })
-  .exec(function (e, r) {
-    console.log(r);
-  })      */
+/*
+ RtsObject.find(function (e, objects) {
+ _.each(objects, function (obj) {
+ obj.publication = moment(obj.object.publication).toDate();
+ obj.save(function () {});
+ })
+ })     */  /*
+ Trend.find({'active': true})
+ .exec(function (error, trends) {
+ _.each(trends, function (trend) {
+ RtsObject.aggregate({
+ $match: {trend: trend.name}
+ },   {
+ $project: {
+ day: {
+ years: {$year: '$publication'},
+ months: {$month: '$publication'},
+ days: {$dayOfMonth: '$publication'}
+ }
+ }
+ },
+ {
+ $group: {
+ _id: "$day",
+ count: {$sum: 1}
+ }
 
+ })
+ .exec(function (e, result) {
+ console.log(result);
+ })
+ }
+ )
+ })    */
 
-Trend.find({})
+Trend.find({'active': true})
   .exec(function (error, trends) {
     _.each(trends, function (trend) {
-       RtsObject.find({'trend': trend.name})
-         .sort('-object.plays')
-         .limit(3)
-         .exec(function (error, rtsObjects) {
-           _.each(rtsObjects, function (rtsObject) {
-             console.log(rtsObject.trend, rtsObject.object.plays)
-             RtsObject.find({
-               'detail.related-content.mainMediaAttachment' : {$elemMatch: {url: rtsObject.object.url}}
-             }).exec(function (e, r) {
-               if (r && r.length) {
-                 r = r[0];
-                 var curated = {
-                   date: trend.date,
-                   keyword: trend,
-                   active: true,
-                   item: null
-                 };
-                 r.object.detail = r.detail;
-                 curated.item = r.object;
-                // RtsCuratedObject.create(curated, function (e) { console.log(e)})
-               } else {
-                 var curated = {
-                   date: trend.date,
-                   keyword: trend,
-                   active: true,
-                   item: null
-                 };
-                 rtsObject.object.detail = rtsObject.detail;
-                 curated.item = rtsObject.object;
-               //  RtsCuratedObject.create(curated, function (e) { console.log(e)})
-               }
-             })
-           })
-         })
+
+
+
+
+      RtsObject.find({'trend': trend.name})
+        .sort('-object.plays')
+        .limit(3)
+        .exec(function (error, rtsObjects) {
+          _.each(rtsObjects, function (rtsObject, index) {
+            RtsObject.find({
+              'detail.related-content.mainMediaAttachment' : {$elemMatch: {url: rtsObject.object.url}}
+            }).exec(function (e, r) {
+              if (r && r.length) {
+                r = r[0];
+                var curated = {
+                  date: trend.date,
+                  keyword: trend,
+                  active: true,
+                  item: null
+                };
+                r.object.detail = r.detail;
+                curated.item = r.object;
+                curated.item.order = index;
+                RtsCuratedObject.create(curated, function (e) { console.log(e)})
+              } else {
+                var curated = {
+                  date: trend.date,
+                  keyword: trend,
+                  active: true,
+                  item: null
+                };
+                rtsObject.object.detail = rtsObject.detail;
+                curated.item = rtsObject.object;
+                curated.item.order = index;
+                RtsCuratedObject.create(curated, function (e) { console.log(e)})
+              }
+            })
+          })
+        })
     })
   })
 

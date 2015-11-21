@@ -7,7 +7,8 @@ var RtsobjectSchema = new Schema({
   trend: String,
   date: Date,
   object: {},
-  detail: {}
+  detail: {},
+  publication: Date
 });
 
 module.exports = mongoose.model('Rtsobject', RtsobjectSchema);
