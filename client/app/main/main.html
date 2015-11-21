@@ -99,7 +99,7 @@
             </div><!-- END Main Article -->
 
             <!-- Related Articles -->
-            <div class="" ng-if="keyword.items && keyword.items.length > 1">
+            <div ng-if="keyword.items && keyword.items.length > 1">
 
               <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
               <div ng-repeat="item in keyword.items.slice(1, 3)">
@@ -108,14 +108,13 @@
             </div>
 
             <!-- Tweet -->
-            <!--<div class="col-xs-12 col-md-12" ng-if="keyword.category == 'User'">
+            <div class="col-xs-12 col-md-12" ng-if="tweets[keyword.name.toLowerCase()]">
               <div class="twitter-block">
-                  <img src="{{keyword.items[0].img}}" alt="Twitter icon" />
-                  <p ng-binf-html="keyword.items[0].intro"></p>
-                  <a href="#" target="_blank">{{keyword.items[0].title}} </a>
+                  <img ng-src="assets/images/twitter-black.png" alt="Twitter icon" />
+                  <p>“ {{tweets[keyword.name.toLowerCase()].title}} ”</p>
+                  <a href="#" target="_blank">{{tweets[keyword.name.toLowerCase()].account}} </a>
               </div>
-            </div>-->
-            
+            </div>
               
           </li>
         </ul> <!-- End Keywords List -->

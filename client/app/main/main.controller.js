@@ -28,7 +28,16 @@ angular.module('rtsHackdaysApp')
             $scope.months = transformData(month);
          });
         */
-      })
+
+        $scope.tweets = 
+          {
+            "air france": { title: " blabablalb", account: "@rhalloran" },
+            "credit suisse": { title: " blabablalb", account: "@rhalloran" },
+            "us open": { title: " blabablalb", account: "@rhalloran" },
+            "air france": { title: " blabablalb", account: "@rhalloran" },
+            "volkswagen": { title: " blabablalb", account: "@rhalloran" },
+          };
+      });
 
 
     function transformData(datas) {
