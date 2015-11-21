@@ -32,7 +32,7 @@ angular.module('rtsHackdaysApp')
         $scope.tweets = 
           {
             "air france": { title: " #AirFrance fait un record de bénéfices mais la direction licencie. ", account: "@JLMelenchon" },
-            /*"credit suisse": { title: " blabablalb", account: "@rhalloran" },*/
+            "credit suisse": { title: "Credit #suisse to raise $6b as new #ceo rings changes #news #market #business http://j.mp/1QRJE5g", account: "@BusinessNewzzz" },
             "us open": { title: "This is the first time in 10 years that #Rafa will NOT win a Grand Slam.", account: "@usopen" },
             "volkswagen": { title: " #Volkswagen 1) il faut savoir si la France est aussi victime de cette manipulation 2) Une preuve de + que le diesel propre n'a jamais existé", account: "@delphinebatho" },
             "tianjin": { title: " #Breaking: Massive explosion rocks N China's #Tianjin, cause & casualties unclear yet (web sources) @BreakingNews ", account: "@XHNews" },
