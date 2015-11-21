@@ -93,7 +93,8 @@
             </div><!-- END Main Article -->
 
             <!-- Related Articles -->
-            <div class="" ng-if="keyword.items.length > 1">
+            <p>{{keyword.items.length}}</p>
+            <div class="" ng-if="keyword.items && keyword.items.length > 1">
 
               <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
               <div ng-repeat="item in keyword.items.slice(1, 3)">

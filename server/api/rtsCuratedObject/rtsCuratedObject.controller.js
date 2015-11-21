@@ -45,7 +45,7 @@ exports.datas = function(req, res) {
       }
 
       var item      = rtsCuratedObject.item;
-      item.details  = item.detail.streams;
+      item.details  = {streams: item.detail.streams};
       
       if(item.details){
         item.details.preview_image_url = item.detail.preview_image_url;
