@@ -23,6 +23,7 @@ exports.datas = function(req, res) {
     _.forEach(rtsCuratedObjects, function(rtsCuratedObject, key){
 
 
+
       RtsObject.aggregate({
           $match: {trend: rtsCuratedObject.keyword.name}
         },   {
@@ -96,6 +97,7 @@ exports.datas = function(req, res) {
             return res.json(200, rtsCuratedObjects);
           }
         });
+
 
 
 

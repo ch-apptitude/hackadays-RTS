@@ -6,12 +6,13 @@ angular
     .module('rtsHackdaysApp')
     .directive('barChart', barChart);
 
+BarChartCtrl.$inject = ['$scope', '$timeout'];
+
 function barChart() {
     var directive = {
         templateUrl: 'app/barChart/barChart.html',
         restrict: 'EA',
         scope: {
-
             label:  '=',
             series: '=',
             name:   '=',
@@ -24,21 +25,32 @@ function barChart() {
 
 }
 
-BarChartCtrl.$inject = ['$scope'];
 
-function BarChartCtrl($scope) {
 
+function BarChartCtrl($scope, $timeout) {
+
+    $scope.index    = Math.floor(Math.random()*1000000);
+
+    $timeout(function(){
+        draw($scope);
+    }, 10);
+
+    
+    
+    
+}
+
+function draw($scope) {
     var height      = $scope.height;
     var width       = $scope.width;
     var data        = $scope.series;
     var str         = $scope.label;
-    var id          = ".bar-chart";
+    var selector    = "svg.c"+ $scope.index;
 
-    console.log(str);
     var y = d3.scale.linear()
               .range([height, 0]);
 
-    var chart = d3.select(id)
+    var chart = d3.select(selector)
         .attr("width", width)
         .attr("height", height);
 
@@ -55,8 +67,5 @@ function BarChartCtrl($scope) {
       .attr("y", function(d) { return y(d); })
       .attr("height", function(d) { return height - y(d); })
       .attr("width", barWidth - 1)
-      .attr("title", function(d, i) { return (i+1) + " " + str + ": " +d + " article"; });
-
-    
-      
+      .attr("title", function(d, i) { return (i+1) + " " + str + ": " +d + " article(s)"; });
 }

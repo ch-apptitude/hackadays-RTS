@@ -406,26 +406,85 @@ angular.module('rtsHackdaysApp')
      {date: new Date(2015, 11)},
      ];       */
 
+    //TODO merge
+    $scope.recommendedTweets = [
+      {
+        "date": "2015-09-30T22:00:00.000Z",
+        "keywords": [
+          {
+            "name": "User",
+            "category": "User",
+            "items": [
+              {
+                "title": "@bower http://t.co/L",
+                "intro": "<div class='intro'>@bower http://t.co/LglPb8eXNt</div>",
+                "contentType": "programming",
+                "creation": "2015-10-15T19:00:18.000Z",
+                "publication": "2015-10-15T19:00:18.000Z",
+                "modification": "2015-10-15T19:00:18.000Z",
+                "img": "http://pbs.twimg.com/media/CRYUsp6UAAAq9Mt.jpg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "date": "2015-10-31T23:00:00.000Z",
+        "keywords": [
+          {
+            "name": "PHP",
+            "category": "User",
+            "items": [
+              {
+                "title": "XHProf.io: A Web GUI",
+                "intro": "<div class='intro'>XHProf.io: A Web GUI To Analyze The Profiling Data Collected Using XHProf  http://t.co/VuwZxa8ZnR #PHP #Neat http://t.co/VNT8GcGvRj</div>",
+                "contentType": "programming",
+                "creation": "2013-11-29T13:46:09.000Z",
+                "publication": "2013-11-29T13:46:09.000Z",
+                "modification": "2013-11-29T13:46:09.000Z",
+                "img": "http://pbs.twimg.com/media/BaPjwTPIEAEABEr.png",
+                "url": "http://xhprof.io/"
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
     $http.get('http://hackdays.ngrok.com/api/rtsCuratedObjects/datas')
       .then(function (response) {
-        $scope.months = transformData(response.data);
+        var month = response.data;
+
+        $scope.months = transformData(month);
+
+        /*$http.get('http://0e537a34.ngrok.io/api/tweets/recommended?category=')
+         .then(function(tweets) {
+            
+            var tweets =  tweets.data;
+            //console.log(month);
+            _.forEach(tweets, function(tw) {
+              var m = _.findWhere(month, {date: moment(tw.date).format('YYYY-MM-DD')});
+
+              if(m) {
+                _.forEach(tw.keywords, function(k) {
+                  m.keywords.push(k);  
+              });
+                
+              }
+            });
+
+            $scope.months = transformData(month);
+         });
+        */
       })
 
 
     function transformData(datas) {
 
+      //console.log(datas);
 
       // Iterate over everything to prepare our data set
       _.forEach(datas, function (month, k) {
-
-        // faker
-        if (k > 0) {
-          if (!month.keywords) {
-            month.keywords = [];
-          }
-          month.keywords.push(datas[0].keywords[0]);
-        }
-
 
         _.forEach(month.keywords, function (keyword, j) {
 

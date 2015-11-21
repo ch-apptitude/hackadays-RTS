@@ -10,8 +10,11 @@
         <a href="#{{ month.date | date:'MM-yyyy' }}">{{ month.date | date:'MMMM yy' }}</a>
           <div class="dotstyle dotstyle-fillup">
             <ul>
-              <li ng-repeat="keyword in month.keywords" class="">
-                <a href="#{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}"></a>
+              <li ng-repeat="keyword in month.keywords | orderBy:'order'" class="">
+                <a href="#{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
+                  <i class="buble"></i>
+                  <span>{{keyword.name}}</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -21,17 +24,17 @@
 </div>
 <!-- End Vertical Navigation - Pin to Top -->
 
-<div class="container">
+<div class="container container-shadow">
   <div class="row">
-    <div class="col-xs-12 col-lg-12">
+    <div class="col-xs-12 col-lg-12 col-md-10">
       <div ng-repeat="month in months" 
           id="{{ month.date | date:'MM-yyyy' }}">
         
         <!-- Keywords List -->
         <ul class="ul-keywords">
-          <li ng-repeat="keyword in month.keywords" class="row">
+          <li ng-repeat="(key, keyword) in month.keywords | orderBy:'order'" class="row">
             <h2 class="col-xs-12 col-md-12">
-              <span>#{{ keyword.name | uppercase}}</span>
+                <span class="red">#</span><span>{{ keyword.name | uppercase}}</span>
               <bar-chart ng-if="keyword.trends" 
                          series="keyword.trends" 
                          name="keyword.name" 
@@ -42,10 +45,10 @@
             </h2>
             
             <!-- Main Article -->
-            <div class="date" ng-if="keyword.mainArticle !== undefined"
+            <div ng-if="keyword.mainArticle !== undefined"
                  id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
               <h3 class="col-xs-12 col-md-10">{{ keyword.mainArticle.title }}</h3>
-              <p class="col-xs-12 col-md-10">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
+              <p class="col-xs-12 col-md-10 date">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
             
               <!-- VIDEO Player -->
               <div class="col-xs-12 col-md-10"
@@ -61,9 +64,9 @@
 
               <!-- Aside Information -->
               <div class="col-xs-12 col-md-2 aside-info" 
-                   ng-if="keyword.mainArticle['related-content'] && keyword.mainArticle['related-content'].mainMediaAttachment && keyword.mainArticle['related-content'].mainMediaAttachment[0]">
-                <p>{{ keyword.mainArticle['related-content'].mainMediaAttachment[0].title }}</p>
-                <em>[{{ keyword.mainArticle['related-content'].mainMediaAttachment[0].photographer }}]</em>
+                   ng-if="keyword.mainArticle.detail['related-content'] && keyword.mainArticle.detail['related-content'].mainMediaAttachment && keyword.mainArticle.detail['related-content'].mainMediaAttachment[0]">
+                <p>{{ keyword.mainArticle.detail['related-content'].mainMediaAttachment[0].title }}</p>
+                <em ng-if="keyword.mainArticle.detail['related-content'].mainMediaAttachment[0].photographer">[{{ keyword.mainArticle.detail['related-content'].mainMediaAttachment[0].photographer }}]</em>
               </div> <!-- End Aside Information -->
  
               <!-- Article -->
@@ -73,7 +76,7 @@
                 <span class="category">{{ keyword.category | uppercase }}</span>
                 <h4 ng-bind-html="keyword.mainArticle.intro"></h4>
                 <p class="read-more"
-                   ng-class="{hidden: !keyword.mainArticle.isCollapsed}"
+                   ng-class="{hidden: !keyword.mainArticle.isCollapsed||!keyword.mainArticle.body }"
                    ng-click="keyword.mainArticle.isCollapsed = !keyword.mainArticle.isCollapsed">
                   AFFICHER PLUS
                 </p>
@@ -87,16 +90,32 @@
                 </p>-->
               </article> <!-- End Article -->
 
+              <div class="col-xs-12 col-md-3 aside-info" ng-if="keyword.mainArticle.detail['related-content'].articleMediaAttachment && keyword.mainArticle.detail['related-content'].articleMediaAttachment[0] && !keyword.mainArticle.isCollapsed">
+                <img src="{{ keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].img }}" style="max-width:100%;" />
+                <p ng-bind-html="keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].intro"></p>
+              </div>
+
             </div><!-- END Main Article -->
 
             <!-- Related Articles -->
-            <div class="" ng-if="keyword.items.length > 1">
-              <h3 class="col-xs-12 col-md-8">Les autres articles sur #{{ keyword.name }}</h3>
-              
+            <div class="" ng-if="keyword.items && keyword.items.length > 1">
+
+              <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
               <div ng-repeat="item in keyword.items.slice(1, 3)">
                 <related-media item="item" index="$index"></related-media>
               </div>
             </div>
+
+            <!-- Tweet -->
+            <!--<div class="col-xs-12 col-md-12" ng-if="keyword.category == 'User'">
+              <div class="twitter-block">
+                  <img src="{{keyword.items[0].img}}" alt="Twitter icon" />
+                  <p ng-binf-html="keyword.items[0].intro"></p>
+                  <a href="#" target="_blank">{{keyword.items[0].title}} </a>
+              </div>
+            </div>-->
+            
+              
           </li>
         </ul> <!-- End Keywords List -->
       </div>

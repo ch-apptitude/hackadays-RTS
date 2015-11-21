@@ -10,8 +10,9 @@
     <!-- if no video player, diplay image -->
     <div class="col-xs-12"
          ng-class="{'col-md-9': (index==0), 'col-md-3': (index!=0) }"
-         ng-if="item.articleType != 'video' && item.img">
+         ng-if="item.articleType != 'video'">
          <img src="{{ item.img }}" style="max-width:100%;" />
          <p ng-bind-html="item.intro"></p>
     </div><!-- END IMAGE -->
+    
 </div>
