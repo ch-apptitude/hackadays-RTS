@@ -47,10 +47,6 @@ function draw($scope) {
     var str         = $scope.label;
     var selector    = "svg.c"+ $scope.index;
 
-    console.log(d3.select(selector));
-    console.log((selector));
-
-
     var y = d3.scale.linear()
               .range([height, 0]);
 
