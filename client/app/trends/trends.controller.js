@@ -6,16 +6,13 @@ angular.module('rtsHackdaysApp')
     $http.get('http://hackdays.ngrok.com/api/trends')
       .then(function (trends) {
         $scope.trends = trends.data || [];
-        _.each($scope.trends, function (trend) {
-          trend.category = trend.category.join(',');
-        })
       });
 
     $scope.addTrend = addTrend;
     $scope.removeTrend = removeTrend;
     $scope.updateTrend = updateTrend;
     $scope.openDatePicker = openDatePicker;
-    $scope.newTrend = null;
+    $scope.newTrend = {};
 
 
     function openDatePicker(trend) {
@@ -24,13 +21,11 @@ angular.module('rtsHackdaysApp')
     }
 
     function addTrend(trend) {
-      trend.category = trend.category.split(',');
       $scope.loading = true;
       $http.post('http://hackdays.ngrok.com/api/trends', trend)
         .then(function (response) {
-          response.data.category = response.data.category.join(',');
           $scope.trends.push(response.data);
-          $scope.newTrend = null;
+          $scope.newTrend = {};
           $scope.loading = false;
         })
     }
@@ -48,7 +43,6 @@ angular.module('rtsHackdaysApp')
 
     function updateTrend(trend) {
       $scope.loading = true;
-      trend.category = trend.category.split(',');
       console.log(trend);
 
       $http.put('http://hackdays.ngrok.com/api/trends/' + trend._id, trend)

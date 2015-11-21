@@ -53,13 +53,14 @@ function agregateCuratedObjects(rtsCuratedObject)
 
 		var item = rtsCuratedObject.item;
 
-		item.details = item.detail.streams;
 		if(item.detail.body){
 			item.body = item.detail.body;
 		}
 
+
+		item.details = item.detail.streams;
+
 		if(item.details){
-			//item.details = {};
 			item.details.preview_image_url = item.detail.preview_image_url;
 		}
 
