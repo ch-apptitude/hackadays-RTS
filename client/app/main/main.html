@@ -90,8 +90,9 @@
                 </p>-->
               </article> <!-- End Article -->
 
-              <div class="col-xs-12 col-md-3 aside-info" ng-if="keyword.mainArticle.detail['related-content'].articleMediaAttachment && keyword.mainArticle.detail['related-content'].articleMediaAttachment[0] && !keyword.mainArticle.isCollapsed">
-                <img src="{{ keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].img }}" style="max-width:100%;" />
+              <div class="col-xs-12 col-md-2 aside-info" 
+                   ng-if="keyword.mainArticle.detail['related-content'].articleMediaAttachment && keyword.mainArticle.detail['related-content'].articleMediaAttachment[0] && !keyword.mainArticle.isCollapsed">
+                <img ng-src="{{ keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].img }}" style="max-width:100%;" />
                 <p ng-bind-html="keyword.mainArticle.detail['related-content'].articleMediaAttachment[0].intro"></p>
               </div>
 
