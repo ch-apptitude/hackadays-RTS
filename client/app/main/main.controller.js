@@ -10,6 +10,7 @@ angular.module('rtsHackdaysApp')
               name:       "ISIS",
               category:   "Monde",
               order:      0,
+              trends: [4,35,2,4,12,13,14,15,18,20,22,25,30,35,8,5,6,1,3,48,12,7,8,5,6,1,3],
               tweet:
               {
                 "coordinates": null,
@@ -406,7 +407,6 @@ angular.module('rtsHackdaysApp')
       {date: new Date(2015, 11)},
     ];
 
-
     // Iterate over everything to prepare our data set
     _.forEach($scope.months, function(month, k) {
 
@@ -417,7 +417,6 @@ angular.module('rtsHackdaysApp')
         }
         month.keywords.push($scope.months[0].keywords[0]);
       }
-        
       
       _.forEach(month.keywords, function(keyword, j) {
 

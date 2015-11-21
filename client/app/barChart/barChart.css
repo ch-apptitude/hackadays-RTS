@@ -1,0 +1,25 @@
+.bart-chart-container {
+	display: table;
+}
+
+
+.bar-chart {
+}
+
+.bar-chart  rect {
+  fill: #C6C6C6;
+}
+
+.bar-chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+p.chart-legend {
+	font-size: 11px;
+	font-family: sans-serif;
+	color: #878787;
+	line-height: 11px;
+	margin-top: -5px;
+}
