@@ -418,15 +418,6 @@ angular.module('rtsHackdaysApp')
       // Iterate over everything to prepare our data set
       _.forEach(datas, function (month, k) {
 
-        // faker
-        if (k > 0) {
-          if (!month.keywords) {
-            month.keywords = [];
-          }
-          month.keywords.push(datas[0].keywords[0]);
-        }
-
-
         _.forEach(month.keywords, function (keyword, j) {
 
           _.forEach(keyword.items, function (item, i) {

@@ -29,7 +29,7 @@
         
         <!-- Keywords List -->
         <ul class="ul-keywords">
-          <li ng-repeat="keyword in month.keywords" class="row">
+          <li ng-repeat="(key, keyword) in month.keywords" class="row">
             <h2 class="col-xs-12 col-md-12">
               <span>#{{ keyword.name | uppercase}}</span>
               <bar-chart ng-if="keyword.trends" 
@@ -73,7 +73,7 @@
                 <span class="category">{{ keyword.category | uppercase }}</span>
                 <h4 ng-bind-html="keyword.mainArticle.intro"></h4>
                 <p class="read-more"
-                   ng-class="{hidden: !keyword.mainArticle.isCollapsed}"
+                   ng-class="{hidden: !keyword.mainArticle.isCollapsed||!keyword.mainArticle.body }"
                    ng-click="keyword.mainArticle.isCollapsed = !keyword.mainArticle.isCollapsed">
                   AFFICHER PLUS
                 </p>
