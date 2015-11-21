@@ -33,12 +33,11 @@
             <h2 class="col-xs-12 col-md-12">#{{ keyword.name | uppercase}}</h2>
             
             <!-- Main Article -->
-            <div ng-if="keyword.mainArticle !== undefined"
+            <div class="date" ng-if="keyword.mainArticle !== undefined"
                  id="{{ month.date | date:'MM-yyyy' }}-{{keyword.name}}">
               <h3 class="col-xs-12 col-md-10">{{ keyword.mainArticle.title }}</h3>
               <p class="col-xs-12 col-md-10">{{ keyword.mainArticle.publication | date:'dd MMMM yyyy' }}</p>
             
-
               <!-- VIDEO Player -->
               <div class="col-xs-12 col-md-10"
                    ng-if="keyword.mainArticle.articleType == 'video' && keyword.mainArticle.details !== undefined && keyword.mainArticle.details.streams != undefined">
