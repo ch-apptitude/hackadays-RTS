@@ -5,7 +5,11 @@ angular.module('rtsHackdaysApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'com.2fdevs.videogular',
+  'com.2fdevs.videogular.plugins.controls',
+  'com.2fdevs.videogular.plugins.overlayplay',
+  'com.2fdevs.videogular.plugins.poster',
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

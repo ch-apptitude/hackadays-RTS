@@ -12,8 +12,11 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
+      <!-- Fonts -->
+      <link href='https://fonts.googleapis.com/css?family=Crimson+Text:400,700italic,700' rel='stylesheet' type='text/css'>
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/videogular-themes-default/videogular.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -21,7 +24,9 @@
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/relatedMedia/relatedMedia.css">
       <link rel="stylesheet" href="app/trends/trends.css">
+      <link rel="stylesheet" href="app/videoPlayer/videoPlayer.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
     <!-- endbuild -->
@@ -41,8 +46,9 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-33604781-4', 'auto');
       ga('send', 'pageview');
+
     </script>
 
     <!--[if lt IE 9]>
@@ -59,9 +65,16 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/videogular/videogular.js"></script>
+      <script src="bower_components/videogular-controls/vg-controls.js"></script>
+      <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+      <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+      <script src="bower_components/videogular-poster/vg-poster.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
+      <script src="bower_components/angular-i18n/angular-locale_fr-ch.js"></script>
         
         <!-- build:js({.tmp,client}) app/app.js -->
         
@@ -69,8 +82,10 @@
           <!-- injector:js -->
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/relatedMedia/relatedMedia.directive.js"></script>
           <script src="app/trends/trends.controller.js"></script>
           <script src="app/trends/trends.js"></script>
+          <script src="app/videoPlayer/videoPlayer.directive.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
