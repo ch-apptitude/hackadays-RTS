@@ -10,6 +10,8 @@ var path = require('path');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/rtsCuratedObjects', require('./api/rtsCuratedObject'));
+  app.use('/api/tweets', require('./api/tweet'));
   app.use('/api/rtsObjects', require('./api/rtsObject'));
   app.use('/api/trends', require('./api/trend'));
   app.use('/api/things', require('./api/thing'));

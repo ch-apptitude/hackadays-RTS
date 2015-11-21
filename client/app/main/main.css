@@ -203,6 +203,11 @@ ul.ul-keywords {
     padding: 0;
 }
 
+ul.ul-keywords h2 span {
+  float: left;
+  margin-right: 20px;
+}
+
 .dotstyle{
 
 }
@@ -277,3 +282,4 @@ ul.ul-keywords {
 .dotstyle-fillup li.current a::after {
   height: 100%;
 }
+

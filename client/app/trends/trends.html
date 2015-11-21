@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form class="form-inline" ng-repeat="trend in trends">
+      <form class="form" ng-repeat="trend in trends | orderBy:['date', 'order']">
         <div class="form-group">
           <label for="newTrendName{{trend._id}}">Name</label>
           <input type="text" class="form-control" id="newTrendName{{trend._id}}" placeholder="" ng-model="trend.name">
@@ -17,10 +17,13 @@
           <input type="number" class="form-control" id="newTrendOrder{{trend._id}}" placeholder="" ng-model="trend.order">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" uib-datepicker-popup="" ng-model="trend.date" is-open="trend.pickerOpened" datepicker-mode="'month'" min-mode="'month'" ng-required="true" close-text="Close" />
+          <label for="newTrendDate{{trend._id}}">Date</label>
+          <div class="input-group">
+          <input type="text" class="form-control" id="newTrendDate{{trend._id}}" uib-datepicker-popup="" ng-model="trend.date" is-open="trend.pickerOpened" datepicker-mode="'month'" min-mode="'month'" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openDatePicker(trend)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
+            </div>
         </div>
         <div class="checkbox">
           <label>
@@ -29,11 +32,13 @@
         </div>
         <button type="button" class="btn btn-default" ng-disabled="loading" ng-click="updateTrend(trend)">Update</button>
         <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="removeTrend(trend)">Remove</button>
+        <hr>
       </form>
 
 
 
-      <form class="form-inline" ng-submit="addTrend(newTrend)">
+      <form class="form" ng-submit="addTrend(newTrend)">
+        <h2>Add a new trend</h2>
         <div class="form-group">
           <label for="newTrendName">Name</label>
           <input type="text" class="form-control" id="newTrendName" placeholder="" ng-model="newTrend.name">
@@ -45,6 +50,16 @@
         <div class="form-group">
           <label for="newTrendOrder">Order</label>
           <input type="number" class="form-control" id="newTrendOrder" placeholder="" ng-model="newTrend.order">
+        </div>
+
+        <div class="form-group">
+          <label for="newTrendDate">Date</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="newTrendDate" uib-datepicker-popup="" ng-model="newTrend.date" is-open="newTrend.pickerOpened" datepicker-mode="'month'" min-mode="'month'" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePicker(newTrend)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
         </div>
         <div class="checkbox">
           <label>

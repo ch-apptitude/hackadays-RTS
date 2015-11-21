@@ -12,12 +12,14 @@
     "errorhandler": "~1.0.0",
     "express": "~4.9.0",
     "express-session": "~1.0.2",
-    "lodash": "~2.4.1",
+    "lodash": "~3.10.1",
     "method-override": "~1.0.0",
+    "moment": "^2.10.6",
     "mongoose": "~4.0.3",
     "morgan": "~1.0.0",
     "request": "^2.67.0",
-    "serve-favicon": "~2.0.1"
+    "serve-favicon": "~2.0.1",
+    "twitter": "^1.2.5"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

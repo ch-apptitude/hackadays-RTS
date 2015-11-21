@@ -30,7 +30,17 @@
         <!-- Keywords List -->
         <ul class="ul-keywords">
           <li ng-repeat="keyword in month.keywords" class="row">
-            <h2 class="col-xs-12 col-md-12"><span class="red">#</span>{{ keyword.name | uppercase}}</h2>
+
+            <h2 class="col-xs-12 col-md-12">
+                <span class="red">#</span><span>{{ keyword.name | uppercase}}</span>
+              <bar-chart ng-if="keyword.trends" 
+                         series="keyword.trends" 
+                         name="keyword.name" 
+                         width="200" 
+                         height="42" 
+                         label="month.date | date:'MMMM'">
+              </bar-chart>
+            </h2>
             
             <!-- Main Article -->
             <div ng-if="keyword.mainArticle !== undefined"
@@ -82,9 +92,9 @@
 
             <!-- Related Articles -->
             <div class="" ng-if="keyword.items.length > 1">
-              <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
 
-              <div ng-repeat="item in keyword.items.slice(1)">
+              <h5 class="col-xs-12 col-md-8">Davantage sur {{ keyword.name }}</h5>
+              <div ng-repeat="item in keyword.items.slice(1, 3)">
                 <related-media item="item" index="$index"></related-media>
               </div>
             </div>

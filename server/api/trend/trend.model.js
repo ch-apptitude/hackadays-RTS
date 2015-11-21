@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var TrendSchema = new Schema({
   name: String,
   date: Date,
-  category: [String],
+  category: String,
   order: Number,
   type: String,
   active: Boolean
