@@ -7,7 +7,7 @@
   <div class="">
     <ul>
       <li ng-repeat="month in months" class="">
-        <a href="#{{ month.date | date:'MM-yyyy' }}"  du-smooth-scroll offset="80">{{ month.date | date:'MMMM yy' }}</a>
+        <a href="#{{ month.date | date:'MM-yyyy' }}"  du-smooth-scroll offset="80">{{ month.date | date:'MMMM \'yy' }}</a>
           <div class="dotstyle dotstyle-fillup">
             <ul>
               <li ng-repeat="keyword in month.keywords | orderBy:'order'" class="">
@@ -23,7 +23,11 @@
   </div>
 
   <div class="">
-    <p>Created by <a href="http://apptitude.ch">Apptitude</a> during <a href="http://www.srgssr.ch/fr/multimedia/hackdays/">SRG/SSR Hackdays 2015.</a></p>
+    <ul>
+      <li>
+        Créé par <a href="http://apptitude.ch">Apptitude</a> pour les <a href="http://www.srgssr.ch/fr/multimedia/hackdays/">SRG/SSR Hackdays 2015.</a>
+      </li>
+    </ul>
   </div>
 </div>
 <!-- End Vertical Navigation - Pin to Top -->
