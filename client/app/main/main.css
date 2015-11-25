@@ -197,6 +197,11 @@ a:focus{
   padding-left: 10px;
 }
 
+.nav-left-afix span{
+   font-size: 11px;
+  color: #666;
+}
+
 .nav-left-afix a {
   font-size: 11px;
   color: #666;
@@ -266,6 +271,7 @@ ul.ul-keywords h2 span {
   cursor: pointer; /* make the text accessible to screen readers */
   position: absolute;
 }
+
 
 .dotstyle li a span{
   text-indent: 12px;
