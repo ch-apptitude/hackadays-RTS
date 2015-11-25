@@ -7,7 +7,7 @@
   <div class="">
     <ul>
       <li ng-repeat="month in months" class="">
-        <a href="#{{ month.date | date:'MM-yyyy' }}"  du-smooth-scroll offset="80">{{ month.date | date:"MMMM '''yy" }}</a>
+        <a href="#{{ month.date | date:'MM-yyyy' }}"  du-smooth-scroll offset="80">{{ month.date | date:"MMMM ''''yy" }}</a>
           <div class="dotstyle dotstyle-fillup">
             <ul>
               <li ng-repeat="keyword in month.keywords | orderBy:'order'" class="">
