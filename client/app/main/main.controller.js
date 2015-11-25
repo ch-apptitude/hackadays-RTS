@@ -59,8 +59,8 @@ angular.module('rtsHackdaysApp')
 
       // Iterate over everything to prepare our data set
       _.forEach(datas, function (month, k) {
-        month.date = moment(month.date).add(1, 'month');
-        
+        month.date = moment(month.date).add(1, 'month').toDate();
+
         _.forEach(month.keywords, function (keyword, j) {
 
           _.forEach(keyword.items, function (item, i) {
