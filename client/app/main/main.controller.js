@@ -3,7 +3,7 @@
 angular.module('rtsHackdaysApp')
   .controller('MainCtrl', function ($scope, $http, $sce) {
 
-    $http.get('http://hackdays.ngrok.com/api/rtsCuratedObjects/datas')
+    $http.get('/api/rtsCuratedObjects/datas')
       .then(function (response) {
         var month = response.data;
 
